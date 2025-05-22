@@ -1,0 +1,5 @@
+**/build
+**/Makefile
+debug/
+target/
+Cargo.lock

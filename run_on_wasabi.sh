@@ -6,6 +6,8 @@ OS_PATH=$TARGET_PATH"/wasabi"
 APP_NAME="saba"
 MAKEFILE_PATH=$HOME_PATH"/Makefile"
 
+export DISPLAY=0
+
 # execute `mkdir build/` if it doesn't exist
 if [ -d $TARGET_PATH ]
 then

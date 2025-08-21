@@ -3,14 +3,13 @@ use alloc::format;
 use alloc::string::String;
 use alloc::string::ToString;
 use alloc::vec::Vec;
-use noli::net::lookup_host;
 use noli::net::SocketAddr;
 use noli::net::TcpStream;
+use noli::net::lookup_host;
 use saba_core::error::Error;
 use saba_core::http::HttpResponse;
 
 pub struct HttpClient {}
-
 impl HttpClient {
     pub fn new() -> Self {
         Self {}
@@ -23,14 +22,12 @@ impl HttpClient {
                 return Err(Error::Network(format!(
                     "Failed to find IP addresses: {:#?}",
                     e
-                )))
+                )));
             }
         };
-
         if ips.len() < 1 {
             return Err(Error::Network("Failed to find IP addresses".to_string()));
         }
-
         let socket_addr: SocketAddr = (ips[0], port).into();
 
         let mut stream = match TcpStream::connect(socket_addr) {
@@ -38,7 +35,7 @@ impl HttpClient {
             Err(_) => {
                 return Err(Error::Network(
                     "Failed to connect to TCP stream".to_string(),
-                ))
+                ));
             }
         };
 
@@ -59,7 +56,7 @@ impl HttpClient {
             Err(_) => {
                 return Err(Error::Network(
                     "Failed to send a request to TCP stream".to_string(),
-                ))
+                ));
             }
         };
 
@@ -71,7 +68,7 @@ impl HttpClient {
                 Err(_) => {
                     return Err(Error::Network(
                         "Failed to receive a request from TCP stream".to_string(),
-                    ))
+                    ));
                 }
             };
             if bytes_read == 0 {
